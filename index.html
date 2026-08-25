@@ -1,791 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happyland Games — Small Games with Big Heart</title>
+    <meta name="description" content="Happyland Games is an indie game studio from Greece creating cozy, thoughtful, and engaging games.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #fdfbf7;
+            --card-bg: #ffffff;
+            --primary: #2d3748;
+            --accent: #ff6b6b;
+            --accent-hover: #ee5253;
+            --text-dark: #2d3748;
+            --text-muted: #616e7c;
+            --border-color: #e2e8f0;
+            --radius-lg: 16px;
+            --radius-md: 10px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4, .brand-logo {
+            font-family: 'Fredoka', sans-serif;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            max-width: 1080px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header / Nav */
+        header {
+            background-color: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            padding: 18px 0;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero / About Section */
+        .about-section {
+            padding: 70px 0 50px;
+            text-align: center;
+        }
+
+        .about-section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-section p {
+            max-width: 760px;
+            margin: 0 auto 16px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin: 60px 0 30px;
+            color: var(--primary);
+            position: relative;
+        }
+
+        /* Game Cards */
+        .game-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            margin-bottom: 50px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        @media (min-width: 850px) {
+            .game-card {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .game-media {
+            background-color: #000;
+            position: relative;
+            aspect-ratio: 16/9;
+            width: 100%;
+            height: 100%;
+            min-height: 280px;
+        }
+
+        .game-media iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .game-content {
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .game-header h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .game-description {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.98rem;
+        }
+
+        .key-features {
+            margin-bottom: 24px;
+        }
+
+        .key-features h4 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .key-features ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .key-features li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .key-features li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            width: fit-content;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .contact-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+        }
+
+        .contact-email {
+            display: inline-block;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+            margin-top: 10px;
+        }
+
+        .contact-email:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--text-dark);
+            font-size: 1.3rem;
+            transition: color 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
 <body>
-  <header class="header-banner">
-    <div class="container-width" id="ikzq">
-      <div class="logo-container">
-        <div class="logo" id="i634">GrapesJS
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="brand-logo">Happyland Games</a>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-      </div>
-      <nav class="menu">
-        <div class="menu-item">BUILDER
+    </header>
+
+    <main class="container">
+
+        <!-- About Section -->
+        <section id="about" class="about-section">
+            <h1>Small Games with Big Heart</h1>
+            <p>Happyland Games is a two-person indie studio from Greece, creating small games with big heart. Blending cozy aesthetics with clever design, we craft experiences that are easy to pick up, hard to put down, and always made with care.</p>
+            <p>From relaxing idle games to mythological adventures, our work reflects our passion for thoughtful gameplay, visual polish, and emotional connection, built for players who need a little joy in their day.</p>
+        </section>
+
+        <!-- Games Section -->
+        <section id="games">
+            <h2 class="section-title">Our Games</h2>
+
+            <!-- Game 1: Fishing Corner -->
+            <article class="game-card">
+                <div class="game-media">
+                    <iframe src="https://www.youtube.com/embed/videoseries" title="Fishing Corner Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <h3>Fishing Corner</h3>
+                        <p class="game-description">A cozy idle fishing getaway at the corner of your screen. Travel the world, catch rare fish, complete your collection, and upgrade your gear across charming diorama-style locations.</p>
+                    </div>
+                    <div class="key-features">
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li>Sit at the corner of your screen without interrupting your day</li>
+                            <li>Idle & Active Fishing</li>
+                            <li>Fish Collection Album</li>
+                            <li>Quest System & World Map</li>
+                            <li>Mini-Upgrades & Baits</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-folder-open"></i> Press Kit</a>
+                </div>
+            </article>
+
+            <!-- Game 2: Rogue Titan -->
+            <article class="game-card">
+                <div class="game-media">
+                    <iframe src="https://www.youtube.com/embed/videoseries" title="Rogue Titan Trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <div class="game-content">
+                    <div class="game-header">
+                        <h3>Rogue Titan</h3>
+                        <p class="game-description">Defy the Gods in this 3D Roguelike RPG. As Titan Prometheus, you embark on a legendary quest to steal the sacred fire. Explore treacherous dungeons in this turn-based tactical RPG, where every step unveils a new challenge.</p>
+                    </div>
+                    <div class="key-features">
+                        <h4>Key Features:</h4>
+                        <ul>
+                            <li>Master Turn-Based Tactics in grid-based combat</li>
+                            <li>Endless Permadeath with procedural generation</li>
+                            <li>Fresh 3D Roguelike visual design</li>
+                            <li>Deep strategic combat rewarding positioning</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-folder-open"></i> Press Kit</a>
+                </div>
+            </article>
+        </section>
+
+        <!-- Contact / Business Section -->
+        <section id="contact" class="contact-section">
+            <h2>Business & Partnership</h2>
+            <p>For business inquiries, partnerships, or collaborations, contact us at:</p>
+            <a href="mailto:hp.land.ent@gmail.com" class="contact-email">hp.land.ent@gmail.com</a>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://facebook.com" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://twitter.com" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://instagram.com" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://youtube.com" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+            <p>Copyright © 2018-2026 Happyland Games. All rights reserved.</p>
         </div>
-        <div class="menu-item">TEMPLATE
-        </div>
-        <div class="menu-item">WEB
-        </div>
-      </nav>
-      <div class="clearfix">
-      </div>
-      <div class="lead-title">Build your templates without coding
-      </div>
-      <div class="sub-lead-title">All text blocks could be edited easily with double clicking on it. You can create new text blocks with the command from the left panel
-      </div>
-      <div class="lead-btn">Hover me
-      </div>
-    </div>
-  </header>
-  <section class="flex-sect">
-    <div class="container-width">
-      <div class="flex-title">Flex is the new black
-      </div>
-      <div class="flex-desc">With flexbox system you're able to build complex layouts easily and with free responsivity
-      </div>
-      <div class="cards">
-        <div class="card">
-          <div class="card-header">
-          </div>
-          <div class="card-body">
-            <div class="card-title">Title one
-            </div>
-            <div class="card-sub-title">Subtitle one
-            </div>
-            <div class="card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header ch2">
-          </div>
-          <div class="card-body">
-            <div class="card-title">Title two
-            </div>
-            <div class="card-sub-title">Subtitle two
-            </div>
-            <div class="card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header ch3">
-          </div>
-          <div class="card-body">
-            <div class="card-title">Title three
-            </div>
-            <div class="card-sub-title">Subtitle three
-            </div>
-            <div class="card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header ch4">
-          </div>
-          <div class="card-body">
-            <div class="card-title">Title four
-            </div>
-            <div class="card-sub-title">Subtitle four
-            </div>
-            <div class="card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header ch5">
-          </div>
-          <div class="card-body">
-            <div class="card-title">Title five
-            </div>
-            <div class="card-sub-title">Subtitle five
-            </div>
-            <div class="card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-header ch6">
-          </div>
-          <div class="card-body">
-            <div class="card-title">Title six
-            </div>
-            <div class="card-sub-title">Subtitle six
-            </div>
-            <div class="card-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="am-sect">
-    <div class="container-width">
-      <div class="am-container">
-        <img src="/assets/images/demos/phone-app.png" class="img-phone"/>
-        <div class="am-content">
-          <div class="am-pre">ASSET MANAGER
-          </div>
-          <div class="am-title">Manage your images with Asset Manager
-          </div>
-          <div class="am-desc">You can create image blocks with the command from the left panel and edit them with double click
-          </div>
-          <div class="am-post">Image uploading is not allowed in this demo
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="blk-sect">
-    <div class="container-width">
-      <div class="blk-title">Blocks
-      </div>
-      <div class="blk-desc">Each element in HTML page could be seen as a block. On the left panel you could find different kind of blocks that you can create, move and style
-      </div>
-      <div class="price-cards">
-        <div class="price-card-cont">
-          <div class="price-card">
-            <div class="pc-title">Starter
-            </div>
-            <div class="pc-desc">Some random list
-            </div>
-            <div class="pc-feature odd-feat">+ Starter feature 1
-            </div>
-            <div class="pc-feature">+ Starter feature 2
-            </div>
-            <div class="pc-feature odd-feat">+ Starter feature 3
-            </div>
-            <div class="pc-feature">+ Starter feature 4
-            </div>
-            <div class="pc-amount odd-feat">$ 9,90/mo
-            </div>
-          </div>
-        </div>
-        <div class="price-card-cont">
-          <div class="price-card pc-regular">
-            <div class="pc-title">Regular
-            </div>
-            <div class="pc-desc">Some random list
-            </div>
-            <div class="pc-feature odd-feat">+ Regular feature 1
-            </div>
-            <div class="pc-feature">+ Regular feature 2
-            </div>
-            <div class="pc-feature odd-feat">+ Regular feature 3
-            </div>
-            <div class="pc-feature">+ Regular feature 4
-            </div>
-            <div class="pc-amount odd-feat">$ 19,90/mo
-            </div>
-          </div>
-        </div>
-        <div class="price-card-cont">
-          <div class="price-card pc-enterprise">
-            <div class="pc-title">Enterprise
-            </div>
-            <div class="pc-desc">Some random list
-            </div>
-            <div class="pc-feature odd-feat">+ Enterprise feature 1
-            </div>
-            <div class="pc-feature">+ Enterprise feature 2
-            </div>
-            <div class="pc-feature odd-feat">+ Enterprise feature 3
-            </div>
-            <div class="pc-feature">+ Enterprise feature 4
-            </div>
-            <div class="pc-amount odd-feat">$ 29,90/mo
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="bdg-sect">
-    <div class="container-width">
-      <h1 class="bdg-title">The team
-      </h1>
-      <div class="badges">
-        <div class="badge">
-          <div class="badge-header">
-          </div>
-          <img src="/assets/images/demos/team1.jpg" class="badge-avatar"/>
-          <div class="badge-body">
-            <div class="badge-name">Adam Smith
-            </div>
-            <div class="badge-role">CEO
-            </div>
-            <div class="badge-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ipsum dolor sit
-            </div>
-          </div>
-          <div class="badge-foot">
-            <span class="badge-link">f</span>
-            <span class="badge-link">t</span>
-            <span class="badge-link">ln</span>
-          </div>
-        </div>
-        <div class="badge">
-          <div class="badge-header">
-          </div>
-          <img src="/assets/images/demos/team2.jpg" class="badge-avatar"/>
-          <div class="badge-body">
-            <div class="badge-name">John Black
-            </div>
-            <div class="badge-role">Software Engineer
-            </div>
-            <div class="badge-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ipsum dolor sit
-            </div>
-          </div>
-          <div class="badge-foot">
-            <span class="badge-link">f</span>
-            <span class="badge-link">t</span>
-            <span class="badge-link">ln</span>
-          </div>
-        </div>
-        <div class="badge">
-          <div class="badge-header">
-          </div>
-          <img src="/assets/images/demos/team3.jpg" class="badge-avatar"/>
-          <div class="badge-body">
-            <div class="badge-name">Jessica White
-            </div>
-            <div class="badge-role">Web Designer
-            </div>
-            <div class="badge-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore ipsum dolor sit
-            </div>
-          </div>
-          <div class="badge-foot">
-            <span class="badge-link">f</span>
-            <span class="badge-link">t</span>
-            <span class="badge-link">ln</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <footer class="footer-under">
-    <div class="container-width">
-      <div class="footer-container">
-        <div class="foot-lists">
-          <div class="foot-list">
-            <div class="foot-list-title">About us
-            </div>
-            <div class="foot-list-item">Contact
-            </div>
-            <div class="foot-list-item">Events
-            </div>
-            <div class="foot-list-item">Company
-            </div>
-            <div class="foot-list-item">Jobs
-            </div>
-            <div class="foot-list-item">Blog
-            </div>
-          </div>
-          <div class="foot-list">
-            <div class="foot-list-title">Services
-            </div>
-            <div class="foot-list-item">Education
-            </div>
-            <div class="foot-list-item">Partner
-            </div>
-            <div class="foot-list-item">Community
-            </div>
-            <div class="foot-list-item">Forum
-            </div>
-            <div class="foot-list-item">Download
-            </div>
-            <div class="foot-list-item">Upgrade
-            </div>
-          </div>
-          <div class="clearfix">
-          </div>
-        </div>
-        <div class="form-sub">
-          <div class="foot-form-cont">
-            <div class="foot-form-title">Subscribe
-            </div>
-            <div class="foot-form-desc">Subscribe to our newsletter to receive exclusive offers and the latest news
-            </div>
-            <input type="text" name="name" placeholder="Name" class="sub-input"/>
-            <input type="text" name="email" placeholder="Email" class="sub-input"/>
-            <button type="button" class="sub-btn">Submit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="copyright">
-      <div class="container-width">
-        <div class="made-with">
-          made with GrapesJS
-        </div>
-        <div class="foot-social-btns">facebook twitter linkedin mail
-        </div>
-        <div class="clearfix">
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
+
 </body>
-<style>* {
-  box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-  }
-  .clearfix{
-    clear:both;
-  }
-  .header-banner{
-    padding-top:35px;
-    padding-bottom:100px;
-    color:#ffffff;
-    font-family:Helvetica, serif;
-    font-weight:100;
-    background-image:url("/assets/images/demos/bg-gr-v.png"), url("/assets/images/demos/work-desk.jpg");
-    background-attachment:scroll, scroll;
-    background-position:left top, center center;
-    background-repeat:repeat-y, no-repeat;
-    background-size:contain, cover;
-  }
-  .container-width{
-    width:90%;
-    max-width:1150px;
-    margin:0 auto;
-  }
-  .logo-container{
-    float:left;
-    width:50%;
-  }
-  .logo{
-    background-color:#fff;
-    border-radius:5px;
-    width:130px;
-    padding:10px;
-    min-height:30px;
-    text-align:center;
-    line-height:30px;
-    color:#4d114f;
-    font-size:23px;
-  }
-  .menu{
-    float:right;
-    width:50%;
-  }
-  .menu-item{
-    float:right;
-    font-size:15px;
-    color:#eee;
-    width:130px;
-    padding:10px;
-    min-height:50px;
-    text-align:center;
-    line-height:30px;
-    font-weight:400;
-  }
-  .lead-title{
-    margin:150px 0 30px 0;
-    font-size:40px;
-  }
-  .sub-lead-title{
-    max-width:650px;
-    line-height:30px;
-    margin-bottom:30px;
-    color:#c6c6c6;
-  }
-  .lead-btn{
-    margin-top:15px;
-    padding:10px;
-    width:190px;
-    min-height:30px;
-    font-size:20px;
-    text-align:center;
-    letter-spacing:3px;
-    line-height:30px;
-    background-color:#d983a6;
-    border-radius:5px;
-    transition:all 0.5s ease;
-    cursor:pointer;
-  }
-  .lead-btn:hover{
-    background-color:#ffffff;
-    color:#4c114e;
-  }
-  .lead-btn:active{
-    background-color:#4d114f;
-    color:#fff;
-  }
-  .flex-sect{
-    background-color:#fafafa;
-    padding:100px 0;
-    font-family:Helvetica, serif;
-  }
-  .flex-title{
-    margin-bottom:15px;
-    font-size:2em;
-    text-align:center;
-    font-weight:700;
-    color:#555;
-    padding:5px;
-  }
-  .flex-desc{
-    margin-bottom:55px;
-    font-size:1em;
-    color:rgba(0, 0, 0, 0.5);
-    text-align:center;
-    padding:5px;
-  }
-  .cards{
-    padding:20px 0;
-    display:flex;
-    justify-content:space-around;
-    flex-flow:wrap;
-  }
-  .card{
-    background-color:white;
-    height:300px;
-    width:300px;
-    margin-bottom:30px;
-    box-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    border-radius:2px;
-    transition:all 0.5s ease;
-    font-weight:100;
-    overflow:hidden;
-  }
-  .card:hover{
-    margin-top:-5px;
-    box-shadow:0 20px 30px 0 rgba(0, 0, 0, 0.2);
-  }
-  .card-header{
-    height:155px;
-    background-image:url("https://via.placeholder.com/350x250/78c5d6/fff");
-    background-size:cover;
-    background-position:center center;
-  }
-  .card-header.ch2{
-    background-image:url("https://via.placeholder.com/350x250/459ba8/fff");
-  }
-  .card-header.ch3{
-    background-image:url("https://via.placeholder.com/350x250/79c267/fff");
-  }
-  .card-header.ch4{
-    background-image:url("https://via.placeholder.com/350x250/c5d647/fff");
-  }
-  .card-header.ch5{
-    background-image:url("https://via.placeholder.com/350x250/f28c33/fff");
-  }
-  .card-header.ch6{
-    background-image:url("https://via.placeholder.com/350x250/e868a2/fff");
-  }
-  .card-body{
-    padding:15px 15px 5px 15px;
-    color:#555;
-  }
-  .card-title{
-    font-size:1.4em;
-    margin-bottom:5px;
-  }
-  .card-sub-title{
-    color:#b3b3b3;
-    font-size:1em;
-    margin-bottom:15px;
-  }
-  .card-desc{
-    font-size:0.85rem;
-    line-height:17px;
-  }
-  .am-sect{
-    padding-top:100px;
-    padding-bottom:100px;
-    font-family:Helvetica, serif;
-  }
-  .img-phone{
-    float:left;
-  }
-  .am-container{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:space-around;
-  }
-  .am-content{
-    float:left;
-    padding:7px;
-    width:490px;
-    color:#444;
-    font-weight:100;
-    margin-top:50px;
-  }
-  .am-pre{
-    padding:7px;
-    color:#b1b1b1;
-    font-size:15px;
-  }
-  .am-title{
-    padding:7px;
-    font-size:25px;
-    font-weight:400;
-  }
-  .am-desc{
-    padding:7px;
-    font-size:17px;
-    line-height:25px;
-  }
-  .am-post{
-    padding:7px;
-    line-height:25px;
-    font-size:13px;
-  }
-  .blk-sect{
-    padding-top:100px;
-    padding-bottom:100px;
-    background-color:#222222;
-    font-family:Helvetica, serif;
-  }
-  .blk-title{
-    color:#fff;
-    font-size:25px;
-    text-align:center;
-    margin-bottom:15px;
-  }
-  .blk-desc{
-    color:#b1b1b1;
-    font-size:15px;
-    text-align:center;
-    max-width:700px;
-    margin:0 auto;
-    font-weight:100;
-  }
-  .price-cards{
-    margin-top:70px;
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:space-around;
-  }
-  .price-card-cont{
-    width:300px;
-    padding:7px;
-    float:left;
-  }
-  .price-card{
-    margin:0 auto;
-    min-height:350px;
-    background-color:#d983a6;
-    border-radius:5px;
-    font-weight:100;
-    color:#fff;
-    width:90%;
-  }
-  .pc-title{
-    font-weight:100;
-    letter-spacing:3px;
-    text-align:center;
-    font-size:25px;
-    background-color:rgba(0, 0, 0, 0.1);
-    padding:20px;
-  }
-  .pc-desc{
-    padding:75px 0;
-    text-align:center;
-  }
-  .pc-feature{
-    color:rgba(255,255,255,0.5);
-    background-color:rgba(0, 0, 0, 0.1);
-    letter-spacing:2px;
-    font-size:15px;
-    padding:10px 20px;
-  }
-  .pc-feature:nth-of-type(2n){
-    background-color:transparent;
-  }
-  .pc-amount{
-    background-color:rgba(0, 0, 0, 0.1);
-    font-size:35px;
-    text-align:center;
-    padding:35px 0;
-  }
-  .pc-regular{
-    background-color:#da78a0;
-  }
-  .pc-enterprise{
-    background-color:#d66a96;
-  }
-  .footer-under{
-    background-color:#312833;
-    padding-bottom:100px;
-    padding-top:100px;
-    min-height:500px;
-    color:#eee;
-    position:relative;
-    font-weight:100;
-    font-family:Helvetica,serif;
-  }
-  .copyright{
-    background-color:rgba(0, 0, 0, 0.15);
-    color:rgba(238, 238, 238, 0.5);
-    bottom:0;
-    padding:1em 0;
-    position:absolute;
-    width:100%;
-    font-size:0.75em;
-  }
-  .made-with{
-    float:left;
-    width:50%;
-    padding:5px 0;
-  }
-  .foot-social-btns{
-    display:none;
-    float:right;
-    width:50%;
-    text-align:right;
-    padding:5px 0;
-  }
-  .footer-container{
-    display:flex;
-    flex-wrap:wrap;
-    align-items:stretch;
-    justify-content:space-around;
-  }
-  .foot-list{
-    float:left;
-    width:200px;
-  }
-  .foot-list-title{
-    font-weight:400;
-    margin-bottom:10px;
-    padding:0.5em 0;
-  }
-  .foot-list-item{
-    color:rgba(238, 238, 238, 0.8);
-    font-size:0.8em;
-    padding:0.5em 0;
-  }
-  .foot-list-item:hover{
-    color:rgba(238, 238, 238, 1);
-  }
-  .foot-form-cont{
-    width:300px;
-    float:right;
-  }
-  .foot-form-title{
-    color:rgba(255,255,255,0.75);
-    font-weight:400;
-    margin-bottom:10px;
-    padding:0.5em 0;
-    text-align:right;
-    font-size:2em;
-  }
-  .foot-form-desc{
-    font-size:0.8em;
-    color:rgba(255,255,255,0.55);
-    line-height:20px;
-    text-align:right;
-    margin-bottom:15px;
-  }
-  .sub-input{
-    width:100%;
-    margin-bottom:15px;
-    padding:7px 10px;
-    border-radius:2px;
-    color:#fff;
-    background-color:#554c57;
-    border:none;
-  }
-  .sub-btn{
-    width:100%;
-    margin:15px 0;
-    background-color:#785580;
-    border:none;
-    color:#fff;
-    border-radius:2px;
-    padding:7px 10px;
-    font-size:1em;
-    cursor:pointer;
-  }
-  .sub-btn:hover{
-    background-color:#91699a;
-  }
-  .sub-btn:active{
-    background-color:#573f5c;
-  }
-  .bdg-sect{
-    padding-top:100px;
-    padding-bottom:100px;
-    font-family:Helvetica, serif;
-    background-color:#fafafa;
-  }
-  .bdg-title{
-    text-align:center;
-    font-size:2em;
-    margin-bottom:55px;
-    color:#555555;
-  }
-  .badges{
-    padding:20px;
-    display:flex;
-    justify-content:space-around;
-    align-items:flex-start;
-    flex-wrap:wrap;
-  }
-  .badge{
-    width:290px;
-    font-family:Helvetica, serif;
-    background-color:white;
-    margin-bottom:30px;
-    box-shadow:0 2px 2px 0 rgba(0, 0, 0, 0.2);
-    border-radius:3px;
-    font-weight:100;
-    overflow:hidden;
-    text-align:center;
-  }
-  .badge-header{
-    height:115px;
-    background-image:url("/assets/images/demos/bg-gr-v.png"), url("/assets/images/demos/work-desk.jpg");
-    background-position:left top, center center;
-    background-attachment:scroll, fixed;
-    overflow:hidden;
-  }
-  .badge-name{
-    font-size:1.4em;
-    margin-bottom:5px;
-  }
-  .badge-role{
-    color:#777;
-    font-size:1em;
-    margin-bottom:25px;
-  }
-  .badge-desc{
-    font-size:0.85rem;
-    line-height:20px;
-  }
-  .badge-avatar{
-    width:100px;
-    height:100px;
-    border-radius:100%;
-    border:5px solid #fff;
-    box-shadow:0 1px 1px 0 rgba(0, 0, 0, 0.2);
-    margin-top:-75px;
-    position:relative;
-  }
-  .badge-body{
-    margin:35px 10px;
-  }
-  .badge-foot{
-    color:#fff;
-    background-color:#a290a5;
-    padding-top:13px;
-    padding-bottom:13px;
-    display:flex;
-    justify-content:center;
-  }
-  .badge-link{
-    height:35px;
-    width:35px;
-    line-height:35px;
-    font-weight:700;
-    background-color:#fff;
-    color:#a290a5;
-    display:block;
-    border-radius:100%;
-    margin:0 10px;
-  }
-  @media (max-width: 768px){
-    .foot-form-cont{
-      width:400px;
-    }
-    .foot-form-title{
-      width:autopx;
-    }
-  }
-  @media (max-width: 480px){
-    .foot-lists{
-      display:none;
-    }
-  }
-</style>
+</html>
